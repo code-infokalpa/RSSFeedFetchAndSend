@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>dummy CMDT Record</label>
+    <protected>false</protected>
+    <values>
+        <field>From_Name_And_Email__c</field>
+        <value xsi:type="xsd:string">Dummy Do dummy@sandbox.mgsend.net</value>
+    </values>
+    <values>
+        <field>Order_Of_Processing__c</field>
+        <value xsi:type="xsd:double">1.0</value>
+    </values>
+    <values>
+        <field>RSS_Feed_URL__c</field>
+        <value xsi:type="xsd:string">https://www.upwork.com/ab/feed/jobs/rss?and_terms=here_you_go</value>
+    </values>
+    <values>
+        <field>To_Mail__c</field>
+        <value xsi:type="xsd:string">youremail@example.com</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,20 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true,
+      "package": "RSSFeedFetchAndSend",
+      "versionName": "Version 1.0",
+      "versionNumber": "1.1.0.NEXT",
+      "versionDescription": "RSS Feed Fetch and Send Email (Mailgun Integration)"
+    }
+  ],
+  "name": "RSSFeedFetchAndSend",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "59.0",
+  "packageAliases": {
+    "RSSFeedFetchAndSend": "0Ho5f000000CbCrCAK",
+    "RSSFeedFetchAndSend@1.1.0-1": "04t5f000000H3YEAA0"
+  }
+}
