@@ -9,7 +9,10 @@ You can also install the unmanaged package   [RSSFeedFetchAndSend Package](https
 
 ## How to Use
 
-### Step 1 - Configure Mailgun Email Integration
+### Step 1 - Assign PermissionSet
+Assign "RSS Feed Sender" permission set to yourself as an admin to view RSS Feed Entry object's tab and records.
+
+### Step 2 - Configure Mailgun Email Integration
 After successfully registering on Mailgun, obtain the API key.
 
 Navigate to the "RSS Feed Run Config" custom setting and populate the following values:
@@ -17,7 +20,7 @@ Navigate to the "RSS Feed Run Config" custom setting and populate the following 
 1. **'Mailgun API Key'**: This is the API key obtained from Mailgun registration.
 2. **'Mailgun Endpoint URL'**: This is the Mailgun API endpoint to be triggered for sending emails.
 
-### Step 2 - Configure 'RSS Feed Configs' CMDT Record
+### Step 3 - Configure 'RSS Feed Configs' CMDT Record
 Under "RSS Feed Configs" custom metadata records, create at least one record (fetch job configuration).
 
 1. Provide values for **'Label'** and **'RSS Feed Config Name'** (DeveloperName), categorizing the fetch job.
@@ -26,7 +29,7 @@ Under "RSS Feed Configs" custom metadata records, create at least one record (fe
 4. **'From Name And Email'**: Specify the name and email address from which emails will be sent to 'To Email', e.g., "Dore Mon dummy@example.com".
 5. **'To Email'**: Enter the email address to which details of new feed items will be sent.
 
-### Step 3 - Schedule Feed Fetch Scheduler Job
+### Step 4 - Schedule Feed Fetch Scheduler Job
 
 Schedule the `RSSFeedFetchSchedulerJob` job in the Salesforce Developer Console using the following code:
 
