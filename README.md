@@ -1,18 +1,42 @@
-# Salesforce DX Project: Next Steps
+# RSSFeedFetchAndSend
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+This application enables you to retrieve multiple RSS feeds from a source, parse them, and generate corresponding records in Salesforce . Additionally, it sends new feed items (those not already existing) to a pre-defined email address using a custom Mailgun integration through their REST API, ensuring real-time processing with just a 1-minute delay
 
-## How Do You Plan to Deploy Your Changes?
+We have successfully employed this solution to actively retrieve and receive emails containing recent job postings from Upwork in near real-time.
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+You can also install the unmanaged package   [RSSFeedFetchAndSend Package](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t5f000000H3YEAA0)
 
-## Configure Your Salesforce DX Project
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+## How to Use
 
-## Read All About It
+### Step 1 - Configure Mailgun Email Integration
+After successfully registering on Mailgun, obtain the API key.
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+Navigate to the "RSS Feed Run Config" custom setting and populate the following values:
+
+1. **'Mailgun API Key'**: This is the API key obtained from Mailgun registration.
+2. **'Mailgun Endpoint URL'**: This is the Mailgun API endpoint to be triggered for sending emails.
+
+### Step 2 - Configure 'RSS Feed Configs' CMDT Record
+Under "RSS Feed Configs" custom metadata records, create at least one record (fetch job configuration).
+
+1. Provide values for **'Label'** and **'RSS Feed Config Name'** (DeveloperName), categorizing the fetch job.
+2. **'RSS Feed URL'**: Enter the RSS Feed URL.
+3. **'Order Of Processing'**: Assign a numeric value indicating the processing order for multiple RSS Feed Configurations.
+4. **'From Name And Email'**: Specify the name and email address from which emails will be sent to 'To Email', e.g., "Dore Mon dummy@example.com".
+5. **'To Email'**: Enter the email address to which details of new feed items will be sent.
+
+### Step 3 - Schedule Feed Fetch Scheduler Job
+
+Schedule the `RSSFeedFetchSchedulerJob` job in the Salesforce Developer Console using the following code:
+
+
+```java
+// Schedule the job just after 1 minute from now
+Datetime now = Datetime.now();
+Datetime scheduledTime = now.addMinutes(1);
+String cronExp = '' + scheduledTime.second() + ' ' + scheduledTime.minute() + ' ' + scheduledTime.hour() + ' ' + scheduledTime.day() + ' ' + scheduledTime.month() + ' ? ' + scheduledTime.year();
+// Schedule the job
+System.schedule('RSSFeedFetchJob_' + Datetime.now().getTime()/1000, cronExp, new RSSFeedFetchSchedulerJob());
+```
+This code schedules the job one minute from the current time, and you can adjust the scheduling logic as needed.
